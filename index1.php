@@ -1,3 +1,8 @@
+<!-- 
+CS 351
+Final Project Index
+ -->
+
 <?php
 $host = 'localhost'; 
 $dbname = 'test'; 
