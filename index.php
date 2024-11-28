@@ -63,17 +63,17 @@ $stmt = $pdo->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - JIF College</title>
+    <title>MTG Deck Builder - Draftsman</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
-        <h1>JIF College</h1>
+        <h1>Draftsman</h1>
         <nav><p></p>
-            <a href="index.html">Home</a> | 
+            <h2> <a href="index.html">Draftsman</a> </h2> | 
             <a href="about.html">About</a> | 
-            <a href="academics.html">Academics</a>
+            <a href="decks.php">Decks</a>
         </p></nav>
     </header>
     <main>

@@ -137,3 +137,10 @@ h1, h2 {
     overflow: hidden;
     margin-bottom: 40px;
 }
+
+header {
+    background-color: #17829d;
+    color: white;
+    padding: 20px 0;
+    text-align: left;
+}
