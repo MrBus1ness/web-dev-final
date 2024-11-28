@@ -75,6 +75,8 @@ $stmt = $pdo->query($sql);
             <a href="about.html">About</a> | 
             <a href="decks.php">Decks</a>
         </p></nav>
+
+        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
     </header>
     <main>
         <section class="hero">  
