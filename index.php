@@ -79,11 +79,16 @@ $stmt = $pdo->query($sql);
         <button class="login-button" onclick="window.location.href='login.html'">Login</button>
     </header>
     <main>
-        <section class="hero">  
-            <section class="hero-text">
-                <h1>Nursing at JIF College</h1>
-                <p></p>
-                <button class="cta-button">Learn More</button>
-            </section>   
-        </section>
-        <br>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Welcome to Draftsman</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for decks or cards...">
+                <button>Search</button>
+            </div>
+            <button class="hero-button" onclick="window.location.href='get-started.html'">New Deck</button>
+        </div>
+
+    </main>
+</body>
