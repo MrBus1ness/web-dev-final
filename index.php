@@ -75,7 +75,7 @@ try {
             <a href="decks.php">Decks</a>
         </nav>
 
-        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+        <button class="login-button" onclick="window.location.href='login.php'">Login</button>
     </header>
     <main>
 

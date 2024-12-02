@@ -36,31 +36,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="auth-container">
-        <h1>Register</h1>
-        <?php if ($error_message): ?>
-            <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
-        <?php endif; ?>
-        <?php if ($success_message): ?>
-            <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
-        <?php endif; ?>
-        
-        <form method="POST" action="" class="auth-form">
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            <button type="submit" name="register">Register</button>
-        </form>
-        <p>Already have an account? <a href="login.php">Login here</a></p>
-    </div>
+    <header>
+        <nav>
+            <a href="index.html">Draftsman</a> | 
+            <a href="about.html">About</a> | 
+            <a href="decks.php">Decks</a>
+        </nav>
+
+        <button class="login-button" onclick="window.location.href='login.php'">Login</button>
+    </header>
+    <main>
+        <div class="auth-container">
+            <h1>Register</h1>
+            <?php if ($error_message): ?>
+                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+            <?php endif; ?>
+            <?php if ($success_message): ?>
+                <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
+            <?php endif; ?>
+            
+            <form method="POST" action="" class="auth-form">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <button type="submit" name="register">Register</button>
+            </form>
+            <p>Already have an account? <a href="login.php">Login here</a></p>
+        </div>
+    </main>
 </body>
 </html>
