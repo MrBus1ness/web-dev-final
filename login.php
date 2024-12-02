@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
             <p>Don't have an account? <a href="register.php">Register here</a></p>
         </div>
+        <!------------------------------ -->
         <div class="login-container">
         <!-- Logo Section -->
         <div class="logo">
@@ -66,18 +67,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <!-- Login Fields -->
-        <form>
+        <form method="POST" action="" class="auth-form">
             <div class="form-group">
-                <input type="text" placeholder="Username" required>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <input type="password" placeholder="Password" required>
+                <input type="password" id="password" name="password" required>
             </div>
 
             <!-- Buttons -->
             <div class="buttons">
-                <button type="submit" class="login-button">Login</button>
-                <button type="button" class="register-button" onclick="window.location.href='register.html'">Register</button>
+                <button type="submit" class="login" name="login" >Login</button>
+                <button type="button" class="register-button" onclick="window.location.href='register.php'">Register</button>
             </div>
         </form>
     </div>
