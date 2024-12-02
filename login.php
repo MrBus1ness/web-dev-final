@@ -26,34 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login - Draftsman</title>
-    <style>
-         /* General Reset */
-         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: url('background.jpg') no-repeat center center fixed; /* Replace with your image URL */
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-        }
-
-        .login-container {
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            padding: 30px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="loginstyles.css">
 </head>
 <body>
     <header>
@@ -85,6 +58,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
             <p>Don't have an account? <a href="register.php">Register here</a></p>
         </div>
+        <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+            <h1>Login</h1>
+        </div>
+
+        <!-- Login Fields -->
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <button type="submit" class="login-button">Login</button>
+                <button type="button" class="register-button" onclick="window.location.href='register.html'">Register</button>
+            </div>
+        </form>
+    </div>
     </main>
 </body>
 </html>
