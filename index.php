@@ -70,7 +70,7 @@ try {
 <body>
     <header>
         <nav>
-            <h2> <a href="index.html">Draftsman</a> </h2> | 
+            <a href="index.html">Draftsman</a> | 
             <a href="about.html">About</a> | 
             <a href="decks.php">Decks</a>
         </nav>
