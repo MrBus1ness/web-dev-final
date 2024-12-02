@@ -39,31 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button class="login-button" onclick="window.location.href='login.php'">Login</button>
     </header>
     <main>
-        <div class="auth-container">
-            <h1>Login</h1>
-            <?php if ($error_message): ?>
-                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
-            <?php endif; ?>
-            
-            <form method="POST" action="" class="auth-form">
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" name="login">Login</button>
-            </form>
-            <p>Don't have an account? <a href="register.php">Register here</a></p>
-        </div>
-        <!------------------------------ -->
         <div class="login-container">
         <!-- Logo Section -->
         <div class="logo">
             <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
             <h1>Login</h1>
+            <?php if ($error_message): ?>
+                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+            <?php endif; ?>
         </div>
 
         <!-- Login Fields -->
