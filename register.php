@@ -72,6 +72,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
             <p>Already have an account? <a href="login.php">Login here</a></p>
         </div>
+        <!-- ------------------------ -->
+        <div class="register-container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+            <h1>Register</h1>
+        </div>
+
+        <!-- Registration Fields -->
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Confirm Password" required>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <button type="submit" class="register-button">Register</button>
+                <button type="button" class="login-button" onclick="window.location.href='login.html'">Login</button>
+            </div>
+        </form>
+    </div>
     </main>
 </body>
 </html>
