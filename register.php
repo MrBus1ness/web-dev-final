@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Buttons -->
                 <div class="buttons">
                     <button type="submit" class="register-button" name="register">Register</button>
-                    <button type="button" class="login-button" onclick="window.location.href='login.php'">Login</button>
+                    <button type="button" class="login" onclick="window.location.href='login.php'">Login</button>
                 </div>
             </form>
         </div>

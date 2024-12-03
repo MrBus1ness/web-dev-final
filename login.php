@@ -41,30 +41,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main>
         <div class="login-container">
         <!-- Logo Section -->
-        <div class="logo">
-            <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
-            <h1>Login</h1>
-            <?php if ($error_message): ?>
-                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
-            <?php endif; ?>
+            <div class="logo">
+                <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+                <h1>Login</h1>
+                <?php if ($error_message): ?>
+                    <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Login Fields -->
+            <form method="POST" action="" class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <!-- Buttons -->
+                <div class="buttons">
+                    <button type="button" class="register-button" onclick="window.location.href='register.php'">Register</button>
+                    <button type="submit" class="login" name="login">Login</button>
+                </div>
+            </form>
         </div>
-
-        <!-- Login Fields -->
-        <form method="POST" action="" class="auth-form">
-            <div class="form-group">
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <!-- Buttons -->
-            <div class="buttons">
-                <button type="button" class="register-button" onclick="window.location.href='register.php'">Register</button>
-                <button type="submit" class="login" name="login" >Login</button>
-            </div>
-        </form>
-    </div>
     </main>
 </body>
 </html>
