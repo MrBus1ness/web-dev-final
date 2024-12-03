@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Register - Draftsman</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="registerstyles.css">
 </head>
 <body>
     <header>
