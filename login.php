@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!-- Buttons -->
             <div class="buttons">
-                <button type="submit" class="login" name="login" >Login</button>
                 <button type="button" class="register-button" onclick="window.location.href='register.php'">Register</button>
+                <button type="submit" class="login" name="login" >Login</button>
             </div>
         </form>
     </div>

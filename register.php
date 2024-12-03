@@ -46,14 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button class="login-button" onclick="window.location.href='login.php'">Login</button>
     </header>
     <main>
-        <div class="auth-container">
+        <!-- <div class="auth-container">
             <h1>Register</h1>
-            <?php if ($error_message): ?>
-                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
-            <?php endif; ?>
-            <?php if ($success_message): ?>
-                <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
-            <?php endif; ?>
             
             <form method="POST" action="" class="auth-form">
                 <div>
@@ -71,34 +65,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" name="register">Register</button>
             </form>
             <p>Already have an account? <a href="login.php">Login here</a></p>
-        </div>
+        </div> -->
         <!-- ------------------------ -->
         <div class="register-container">
         <!-- Logo Section -->
         <div class="logo">
             <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
             <h1>Register</h1>
+            <?php if ($error_message): ?>
+                <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+            <?php endif; ?>
+            <?php if ($success_message): ?>
+                <div class="success"><?php echo htmlspecialchars($success_message); ?></div>
+            <?php endif; ?>
         </div>
 
         <!-- Registration Fields -->
         <form>
             <div class="form-group">
-                <input type="text" placeholder="Username" required>
+                <input type="text" placeholder="Username" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <input type="password" placeholder="Password" required>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Confirm Password" required>
+                <input type="password" placeholder="Confirm Password" id="confirm_password" name="confirm_password" required>
             </div>
 
             <!-- Buttons -->
             <div class="buttons">
                 <button type="submit" class="register-button">Register</button>
-                <button type="button" class="login-button" onclick="window.location.href='login.html'">Login</button>
+                <button type="button" class="login-button" onclick="window.location.href='login.php'">Login</button>
             </div>
         </form>
     </div>
