@@ -18,9 +18,24 @@ $options = [
 ];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Fetch decks and their first card details
+    $stmt = $conn->prepare("
+        SELECT 
+            d.deck_id, 
+            d.deck_name, 
+            c.name AS card1_name, 
+            c.image_path AS card1_image
+        FROM decks d
+        JOIN cards c ON d.card1 = c.card_id
+        LIMIT 6
+    ");
+    $stmt->execute();
+    $decks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int)$e->getCode());
+    echo "Connection failed: " . $e->getMessage();
 }
 
 // Handle book search
@@ -56,7 +71,8 @@ try {
 // // get everything for main table
 // $sql = 'SELECT student_id, student_name, class_grade FROM lea';
 // $stmt = $pdo->query($sql);
-// ?>
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -89,5 +105,18 @@ try {
             <button class="hero-button" onclick="window.location.href='get-started.html'">New Deck</button>
         </div>
 
+        <!-- Deck Previews -->
+        <h1 style="text-align: center; margin-top: 20px;">Deck Previews</h1>
+        <div class="deck-preview-container">
+            <?php foreach ($decks as $deck): ?>
+                <div class="deck-card">
+                    <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="<?= htmlspecialchars($deck['card1_name']) ?>" class="deck-thumbnail">
+                    <div class="deck-info">
+                        <div class="deck-title"><?= htmlspecialchars($deck['deck_name']) ?></div>
+                        <a href="deck.php?id=<?= $deck['deck_id'] ?>" class="view-deck-button">View Full Deck</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </main>
 </body>
