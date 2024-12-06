@@ -72,16 +72,15 @@ try {
 
         <!-- Deck Previews -->
         <h1 style="text-align: center; margin-top: 20px;">Deck Previews</h1>
+        <div class="deck-preview-container">
         <?php
         if (!empty($decks)) {
             foreach ($decks as $deck) {
                 ?>
                 <div class="deck-preview" onclick="window.location.href='deck.php?id=<?= htmlspecialchars($deck['deck_id']) ?>'">
-                    <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="Preview of <?= htmlspecialchars($deck['deck_name']) ?>" class="deck-image">
+                    <img style="max-width: 150px; max-height: 100%; object-fit: cover; display: block;" src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="Preview of <?= htmlspecialchars($deck['deck_name']) ?>" class="deck-image">
                     <div class="gradient-overlay"></div>
-                    <div class="deck-info">
-                        <?= htmlspecialchars($deck['deck_name']) ?>
-                        </div>
+                    <div class="deck-info"><?= htmlspecialchars($deck['deck_name']) ?></div>
                     </div>
                     <?php
                 } 
@@ -89,5 +88,6 @@ try {
                 echo "No decks found.";
             }
             ?>
+        </div>
     </main>
 </body>
