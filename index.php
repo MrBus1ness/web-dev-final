@@ -37,41 +37,6 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-
-// Handle book search
-// $search_results = null;
-// if (isset($_GET['search']) && !empty($_GET['search'])) {
-//     $search_term = '%' . $_GET['search'] . '%';
-//     $search_sql = 'SELECT student_id, student_name, class_grade FROM lea WHERE student_id LIKE :search';
-//     $search_stmt = $pdo->prepare($search_sql);
-//     $search_stmt->execute(['search' => $search_term]);
-//     $search_results = $search_stmt->fetchAll();
-// }
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     if (isset($_POST['student_id']) && isset($_POST['student_name']) && isset($_POST['class_grade'])) {
-//         // Insert new entry
-//         $student_id = htmlspecialchars($_POST['student_id']);
-//         $student_name = htmlspecialchars($_POST['student_name']);
-//         $class_grade = htmlspecialchars($_POST['class_grade']);
-        
-//         $insert_sql = 'INSERT INTO lea (student_id, student_name, class_grade) VALUES (:student_id, :student_name, :class_grade)';
-//         $stmt_insert = $pdo->prepare($insert_sql);
-//         $stmt_insert->execute(['student_id' => $student_id, 'student_name' => $student_name, 'class_grade' => $class_grade]);
-//     } elseif (isset($_POST['delete_id'])) {
-//         // Delete an entry
-//         $delete_id = (int) $_POST['delete_id'];
-        
-//         $delete_sql = 'DELETE FROM lea WHERE student_id = :student_id';
-//         $stmt_delete = $pdo->prepare($delete_sql);
-//         $stmt_delete->execute(['student_id' => $delete_id]);
-//     }
-// }
-
-// // get everything for main table
-// $sql = 'SELECT student_id, student_name, class_grade FROM lea';
-// $stmt = $pdo->query($sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -107,16 +72,22 @@ try {
 
         <!-- Deck Previews -->
         <h1 style="text-align: center; margin-top: 20px;">Deck Previews</h1>
-        <div class="deck-preview-container">
-            <?php foreach ($decks as $deck): ?>
-                <div class="deck-card" onclick="window.location.href='deck.php?id=<?= $deck['deck_id'] ?>'">
-                    <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="<?= htmlspecialchars($deck['card1_name']) ?>" class="deck-thumbnail">
-                    <div class="deck-info-card">
-                        <div class="deck-title"><?= htmlspecialchars($deck['deck_name']) ?></div>
-                        <a href="deck.php?id=<?= $deck['deck_id'] ?>" class="view-deck-button">View Full Deck</a>
+        <?php
+        if (!empty($decks)) {
+            foreach ($decks as $deck) {
+                ?>
+                <div class="deck-preview" onclick="window.location.href='deck.php?id=<?= htmlspecialchars($deck['deck_id']) ?>'">
+                    <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="Preview of <?= htmlspecialchars($deck['deck_name']) ?>" class="deck-image">
+                    <div class="gradient-overlay"></div>
+                    <div class="deck-info">
+                        <?= htmlspecialchars($deck['deck_name']) ?>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+                    <?php
+                } 
+            } else {
+                echo "No decks found.";
+            }
+            ?>
     </main>
 </body>
