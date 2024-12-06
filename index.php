@@ -109,9 +109,9 @@ try {
         <h1 style="text-align: center; margin-top: 20px;">Deck Previews</h1>
         <div class="deck-preview-container">
             <?php foreach ($decks as $deck): ?>
-                <div class="deck-card">
+                <div class="deck-card" onclick="window.location.href='deck.php?id=<?= $deck['deck_id'] ?>'">
                     <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="<?= htmlspecialchars($deck['card1_name']) ?>" class="deck-thumbnail">
-                    <div class="deck-info">
+                    <div class="deck-info-card">
                         <div class="deck-title"><?= htmlspecialchars($deck['deck_name']) ?></div>
                         <a href="deck.php?id=<?= $deck['deck_id'] ?>" class="view-deck-button">View Full Deck</a>
                     </div>
