@@ -78,7 +78,7 @@ try {
             foreach ($decks as $deck) {
                 ?>
                 <div class="deck-preview" onclick="window.location.href='deck.php?id=<?= htmlspecialchars($deck['deck_id']) ?>'">
-                    <img style="max-width: 150px; max-height: 100%; object-fit: cover; display: block;" src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="Preview of <?= htmlspecialchars($deck['deck_name']) ?>" class="deck-image">
+                    <img src="<?= htmlspecialchars($deck['card1_image']) ?>" alt="Preview of <?= htmlspecialchars($deck['deck_name']) ?>" class="deck-image">
                     <div class="gradient-overlay"></div>
                     <div class="deck-info"><?= htmlspecialchars($deck['deck_name']) ?></div>
                     </div>

@@ -206,7 +206,7 @@ nav a:hover {
 .deck-preview {
     position: relative;
     width: 150px; /* Adjust the width as needed */
-    height: 300px; /* Adjust the height as needed */
+    height: 250px; /* Adjust the height as needed */
     overflow: hidden;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -227,7 +227,8 @@ nav a:hover {
 }
 .deck-info {
     position: absolute;
-    bottom: 0;
+    top: 117px;
+    height: 75px;
     width: 100%;
     padding: 10px;
     text-align: center;
