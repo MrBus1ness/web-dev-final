@@ -2,9 +2,9 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 /* Add a wrapper for the table for better layout control */
@@ -201,14 +201,16 @@ nav a:hover {
 .deck-preview-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust the gap between previews as needed */
+    gap: 60px; /* Adjust the gap between previews as needed */
+    padding-top: 20px;
+    padding-left: 80px;
 }
 .deck-preview {
     position: relative;
-    width: 150px; /* Adjust the width as needed */
+    width: 149px; /* Adjust the width as needed */
     height: 208px; /* Adjust the height as needed */
     overflow: hidden;
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -228,8 +230,8 @@ nav a:hover {
 .deck-info {
     position: absolute;
     top: 117px;
-    height: 70px;
-    width: 100%;
+    height: 72px;
+    width: 87%;
     padding: 10px;
     text-align: center;
     background-color: white;
