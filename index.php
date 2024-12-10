@@ -85,7 +85,7 @@ try {
                 <input type="text" placeholder="Search for decks or cards...">
                 <button>Search</button>
             </div>
-            <button class="hero-button" onclick="window.location.href='get-started.html'">New Deck</button>
+            <button class="hero-button" onclick="window.location.href='create_deck.php'">New Deck</button>
         </div>
 
         <!-- User Decks -->

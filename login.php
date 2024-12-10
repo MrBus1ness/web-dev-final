@@ -1,5 +1,6 @@
 <?php
 session_start();
+$error = ""; // Initialize the variable
 
 // Database connection
 $host = 'localhost'; 
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: index.php");
         exit();
     } else {
-        $error_message = "Invalid username or password.";
+        $error = "Invalid username or password.";
     }
 }
 ?>
@@ -68,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="logo">
                 <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
                 <h1>Login</h1>
-                <?php if ($error_message): ?>
-                    <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+                <?php if ($error): ?>
+                    <div class="error"><?php echo htmlspecialchars($error); ?></div>
                 <?php endif; ?>
             </div>
 

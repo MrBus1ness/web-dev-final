@@ -160,3 +160,35 @@ main {
 .suggestions-list li:hover {
     background-color: #f0f0f0;
 }
+
+/* rename styling */
+.deck-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#rename-form {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#rename-form input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#rename-form button {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#rename-form button:hover {
+    background-color: #0056b3;
+}

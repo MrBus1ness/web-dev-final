@@ -129,6 +129,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_card'])) {
     $stmt->close();
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rename_deck'])) {
+    $newDeckName = trim($_POST['new_deck_name']);
+
+    // Validate new deck name
+    if (!empty($newDeckName)) {
+        try {
+            // Update the deck name in the database
+            $stmt = $conn->prepare("UPDATE decks SET deck_name = ? WHERE deck_id = ?");
+            $stmt->bind_param("si", $newDeckName, $deck_id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                // Refresh the page to reflect changes
+                header("Location: deck.php?id=$deck_id");
+                exit();
+            } else {
+                echo "<p style='color: red;'>No changes were made to the deck name.</p>";
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo "<p style='color: red;'>Error renaming deck: " . $e->getMessage() . "</p>";
+        }
+    } else {
+        echo "<p style='color: red;'>Deck name cannot be empty.</p>";
+    }
+}
 
 // Close connection
 $conn->close();
@@ -152,6 +177,31 @@ $conn->close();
     </header>
 
     <main>
+    <div class="deck-header">
+        <h1 id="deck-name"><?= htmlspecialchars($deck['deck_name']) ?></h1>
+        <button id="rename-button" onclick="toggleRenameForm()">Rename</button>
+    </div>
+
+    <!-- Rename Form -->
+    <form id="rename-form" method="POST" action="deck.php?id=<?= htmlspecialchars($deck_id) ?>" style="display: none;">
+        <input type="text" name="new_deck_name" placeholder="Enter new deck name" required>
+        <button type="submit" name="rename_deck">Submit</button>
+    </form>
+
+    <script>
+    function toggleRenameForm() {
+        const form = document.getElementById('rename-form');
+        const button = document.getElementById('rename-button');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            button.style.display = 'none';
+        } else {
+            form.style.display = 'none';
+            button.style.display = 'inline';
+        }
+    }
+    </script>
+
         <!-- display a success message upon completing an action -->
     <?php if (isset($successMessage)): ?>
         <p class="success-message"><?= htmlspecialchars($successMessage) ?></p>
@@ -164,7 +214,7 @@ $conn->close();
         <?php if (isset($error)): ?>
             <p><?= htmlspecialchars($error) ?></p>
         <?php else: ?>
-            <h1><?= htmlspecialchars($deck['deck_name']) ?></h1>
+            <hr>
             <div class="deck-cards">
                 <?php foreach ($cards as $card): ?>
                     <div class="card">
