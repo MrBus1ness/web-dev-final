@@ -179,8 +179,13 @@ $conn->close();
                 <h2>Add a New Card</h2>
                 <form method="POST">
                     <input type="hidden" name="deck_id" value="<?= htmlspecialchars($deck['deck_id']) ?>">
-                    <label for="card_id">Card ID:</label>
-                    <input type="number" id="card_id" name="card_id" required min="1" placeholder="Enter Card ID">
+                    
+                    <label for="card_name">Search Card:</label>
+                    <input type="text" id="card_name" name="card_name" placeholder="Type card name" autocomplete="off">
+                    <input type="hidden" id="card_id" name="card_id">
+
+                    <ul id="card-suggestions" class="suggestions-list"></ul>
+
                     <button type="submit" name="add_card" class="add-button">Add Card</button>
                 </form>
             </div>
