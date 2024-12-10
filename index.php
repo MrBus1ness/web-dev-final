@@ -3,8 +3,8 @@ session_start(); // Start the session to track the logged-in user
 
 $host = 'localhost'; 
 $dbname = 'card_shop'; 
-$user = 'hunter'; 
-$pass = 'hunter';
+$user = 'root'; 
+$pass = 'mysql';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
@@ -74,10 +74,10 @@ try {
             <a href="decks.php">Decks</a>
         </nav>
 
-        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])): ?>
+        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
             <!-- User is logged in -->
             <div class="user-dropdown">
-                <button class="user-name"><?= htmlspecialchars($_SESSION['user_name']); ?></button>
+                <button class="user-name"><?= htmlspecialchars($_SESSION['username']); ?></button>
                 <div class="dropdown-menu">
                     <form method="POST" action="logout.php">
                         <button type="submit" class="logout-button">Log Out</button>
