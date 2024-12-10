@@ -195,5 +195,56 @@ $conn->close();
     <footer>
         <p>&copy; <?= date('Y') ?> Draftsman</p>
     </footer>
+
+    <script>
+        const cardInput = document.getElementById('card_name');
+        const suggestionsList = document.getElementById('card-suggestions');
+        const cardIdField = document.getElementById('card_id');
+
+        cardInput.addEventListener('input', async () => {
+            const query = cardInput.value;
+
+            // Clear previous suggestions if input is empty
+            if (!query) {
+                suggestionsList.innerHTML = '';
+                cardIdField.value = '';
+                return;
+            }
+
+            // Fetch suggestions from the backend
+            const response = await fetch(`search_cards.php?term=${encodeURIComponent(query)}`);
+            if (!response.ok) {
+                console.error('Failed to fetch card suggestions');
+                return;
+            }
+
+            const cards = await response.json();
+
+            // Display suggestions
+            suggestionsList.innerHTML = '';
+            cards.forEach(card => {
+                const suggestionItem = document.createElement('li');
+                suggestionItem.textContent = card.name;
+                suggestionItem.dataset.cardId = card.card_id;
+
+                // Add click listener to select a card
+                suggestionItem.addEventListener('click', () => {
+                    cardInput.value = card.name;
+                    cardIdField.value = card.card_id;
+                    suggestionsList.innerHTML = ''; // Clear suggestions
+                });
+
+                suggestionsList.appendChild(suggestionItem);
+            });
+        });
+
+        // Hide suggestions when clicking outside the input
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.add-card-container')) {
+                suggestionsList.innerHTML = '';
+            }
+        });
+    </script>
+
 </body>
 </html>
