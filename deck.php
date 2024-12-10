@@ -85,6 +85,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_card'])) {
     }
 }
 
+// Add a card
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_card'])) {
+    $newCardId = intval($_POST['card_id']);
+    $deckId = intval($_POST['deck_id']);
+
+    // Fetch the deck to find the first empty card slot
+    $deckQuery = "SELECT * FROM decks WHERE deck_id = ?";
+    $stmt = $conn->prepare($deckQuery);
+    $stmt->bind_param("i", $deckId);
+    $stmt->execute();
+    $deckResult = $stmt->get_result();
+    $deck = $deckResult->fetch_assoc();
+
+    // Find the first empty card slot
+    $emptySlot = null;
+    for ($i = 1; $i <= 10; $i++) {
+        if (empty($deck["card$i"])) {
+            $emptySlot = "card$i";
+            break;
+        }
+    }
+
+    if ($emptySlot) {
+        // Add the new card to the empty slot
+        $addCardQuery = "UPDATE decks SET $emptySlot = ? WHERE deck_id = ?";
+        $stmt = $conn->prepare($addCardQuery);
+        $stmt->bind_param("ii", $newCardId, $deckId);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $successMessage = "Card added successfully.";
+        } else {
+            $errorMessage = "Failed to add the card.";
+        }
+    } else {
+        $errorMessage = "Deck is already full (10 cards).";
+    }
+
+    $stmt->close();
+}
+
 
 // Close connection
 $conn->close();
@@ -133,6 +174,15 @@ $conn->close();
                         </form>
                     </div>
                 <?php endforeach; ?>
+            </div>
+            <div class="add-card-container">
+                <h2>Add a New Card</h2>
+                <form method="POST">
+                    <input type="hidden" name="deck_id" value="<?= htmlspecialchars($deck['deck_id']) ?>">
+                    <label for="card_id">Card ID:</label>
+                    <input type="number" id="card_id" name="card_id" required min="1" placeholder="Enter Card ID">
+                    <button type="submit" name="add_card" class="add-button">Add Card</button>
+                </form>
             </div>
         <?php endif; ?>
     </main>
