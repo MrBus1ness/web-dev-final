@@ -74,8 +74,22 @@ try {
             <a href="decks.php">Decks</a>
         </nav>
 
-        <button class="login-button" onclick="window.location.href='login.php'">Login</button>
+        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])): ?>
+            <!-- User is logged in -->
+            <div class="user-dropdown">
+                <button class="user-name"><?= htmlspecialchars($_SESSION['user_name']); ?></button>
+                <div class="dropdown-menu">
+                    <form method="POST" action="logout.php">
+                        <button type="submit" class="logout-button">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        <?php else: ?>
+            <!-- User is not logged in -->
+            <button class="login-button" onclick="window.location.href='login.php'">Login</button>
+        <?php endif; ?>
     </header>
+
     <main>
 
         <!-- Hero Section -->
