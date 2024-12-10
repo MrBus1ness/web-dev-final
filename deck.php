@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_card'])) {
     $deckResult = $stmt->get_result();
     $deck = $deckResult->fetch_assoc();
 
-    for ($i = 1; $i <= 10; $i++) {
+    for ($i = 10; $i >= 1; $i--) {
         if ($deck["card$i"] == $cardIdToDelete) {
             $columnToDelete = "card$i";
             break;
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_card'])) {
 
     // Find the first empty card slot
     $emptySlot = null;
-    for ($i = 1; $i <= 10; $i++) {
+    for ($i = 10; $i >= 1; $i--) {
         if (empty($deck["card$i"])) {
             $emptySlot = "card$i";
             break;
@@ -116,6 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_card'])) {
 
         if ($stmt->affected_rows > 0) {
             $successMessage = "Card added successfully.";
+            // Redirect to refresh the page and show the updated deck
+            header("Location: deck.php?id=$deckId");
+            exit();
         } else {
             $errorMessage = "Failed to add the card.";
         }
