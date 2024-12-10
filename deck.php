@@ -142,7 +142,7 @@ $conn->close();
 <body>
     <header>
         <nav>
-            <a href="index.html">Home</a> | 
+            <a href="index.php">Home</a> | 
             <a href="about.html">About</a> | 
             <a href="decks.php">All Decks</a>
         </nav>
