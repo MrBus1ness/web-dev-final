@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <header>
         <nav>
-            <a href="index.html">Draftsman</a> | 
+            <a href="index.php">Draftsman</a> | 
             <a href="about.html">About</a> | 
             <a href="decks.php">Decks</a>
         </nav>

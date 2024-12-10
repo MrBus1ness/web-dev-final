@@ -1,22 +1,46 @@
 <?php
-// login.php - Login page
 session_start();
-require_once 'config.php';
-require_once 'auth.php';
 
-$error_message = '';
+// Database connection
+$host = 'localhost'; 
+$dbname = 'card_shop'; 
+$user = 'root'; 
+$pass = 'mysql';
+$charset = 'utf8mb4';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['login'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        
-        if (login_user($pdo, $username, $password)) {
-            header('Location: index.php');
-            exit;
-        } else {
-            $error_message = 'Invalid username or password';
-        }
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $conn = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+// Check login form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Query to authenticate user
+    $stmt = $conn->prepare("SELECT user_id, username, password FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password'])) {
+        // Login successful
+        $_SESSION['user_id'] = $user['user_id']; // Store the user_id in session
+        $_SESSION['username'] = $user['username']; // Optional: Store username if needed
+
+        // Redirect to the main page
+        header("Location: index.php");
+        exit();
+    } else {
+        $error_message = "Invalid username or password.";
     }
 }
 ?>
@@ -31,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <header>
         <nav>
-            <a href="index.html">Draftsman</a> | 
+            <a href="index.php">Draftsman</a> | 
             <a href="about.html">About</a> | 
             <a href="decks.php">Decks</a>
         </nav>
