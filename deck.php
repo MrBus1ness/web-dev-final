@@ -196,6 +196,7 @@ $conn->close();
         <p>&copy; <?= date('Y') ?> Draftsman</p>
     </footer>
 
+    <!-- Search Suggestions JavaScript -->
     <script>
         const cardInput = document.getElementById('card_name');
         const suggestionsList = document.getElementById('card-suggestions');

@@ -2,8 +2,8 @@
 // Include the database connection
 $host = 'localhost'; // Replace with your DB host
 $username = 'root'; // Replace with your DB username
-$password = ''; // Replace with your DB password
-$dbname = 'your_database_name'; // Replace with your DB name
+$password = 'mysql'; // Replace with your DB password
+$dbname = 'card_shop'; // Replace with your DB name
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
