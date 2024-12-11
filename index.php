@@ -1,3 +1,8 @@
+<!-- 
+ CS 351 Final
+ Hunter Runyon
+-->
+
 <?php
 session_start(); // Start the session to track the logged-in user
 
@@ -18,7 +23,9 @@ try {
     $conn = new PDO($dsn, $user, $pass, $options);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $loggedInUserId = $_SESSION['user_id'];
+    // Check if the user is logged in
+    $loggedInUserId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    $loggedInUserName = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 
     // Fetch decks owned by the logged-in user
     $userDecks = [];
@@ -37,24 +44,39 @@ try {
         $userDecks = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Fetch all other decks
-    $stmt = $conn->prepare("
-        SELECT 
-            d.deck_id, 
-            d.deck_name, 
-            c.name AS card1_name, 
-            c.image_path AS card1_image
-        FROM decks d
-        JOIN cards c ON d.card1 = c.card_id
-        WHERE d.owner_id != :user_id OR d.owner_id IS NULL
-        LIMIT 6
-    ");
-    $stmt->execute(['user_id' => $loggedInUserId]);
+    // Fetch all other decks (or all decks if no user is logged in)
+    if ($loggedInUserId) {
+        $stmt = $conn->prepare("
+            SELECT 
+                d.deck_id, 
+                d.deck_name, 
+                c.name AS card1_name, 
+                c.image_path AS card1_image
+            FROM decks d
+            JOIN cards c ON d.card1 = c.card_id
+            WHERE d.owner_id != :user_id OR d.owner_id IS NULL
+            LIMIT 6
+        ");
+        $stmt->execute(['user_id' => $loggedInUserId]);
+    } else {
+        $stmt = $conn->prepare("
+            SELECT 
+                d.deck_id, 
+                d.deck_name, 
+                c.name AS card1_name, 
+                c.image_path AS card1_image
+            FROM decks d
+            JOIN cards c ON d.card1 = c.card_id
+            LIMIT 6
+        ");
+        $stmt->execute();
+    }
     $otherDecks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +96,7 @@ try {
             <a href="decks.php">Decks</a>
         </nav>
 
-        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
-            <!-- User is logged in -->
+        <?php if (isset($_SESSION['user_id'])): ?>
             <div class="user-dropdown">
                 <button class="user-name"><?= htmlspecialchars($_SESSION['username']); ?></button>
                 <div class="dropdown-menu">
@@ -85,9 +106,9 @@ try {
                 </div>
             </div>
         <?php else: ?>
-            <!-- User is not logged in -->
             <button class="login-button" onclick="window.location.href='login.php'">Login</button>
         <?php endif; ?>
+
     </header>
 
     <main>
