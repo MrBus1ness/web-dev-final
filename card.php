@@ -24,6 +24,7 @@ try {
 }
 
 // Fetch card details based on the ID passed in the URL
+$card = null; // Initialize card variable
 if (isset($_GET['id'])) {
     $card_id = $_GET['id']; // Get the card ID from the URL
 
@@ -39,30 +40,109 @@ if (isset($_GET['id'])) {
 
     // Fetch the result
     $card = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Check if the card exists and display it
-    if ($card) {
-        echo "<h1>" . htmlspecialchars($card['name']) . "</h1>";
-        echo "<img src='" . htmlspecialchars($card['image_path']) . "' alt='" . htmlspecialchars($card['name']) . "' />";
-    } else {
-        echo "Card not found.";
-    }
-} else {
-    echo "No card ID specified.";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Details</title>
+    <title>MTG Deck Builder - Draftsman</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px auto;
+            max-width: 800px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ddd;
+        }
+
+        .card-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-info {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .card-info h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #222;
+        }
+
+        .card-info p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .card-info .attribute {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .card-info .attribute span {
+            font-weight: normal;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        footer a {
+            color: #FF5733;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
+
+<header>
         <nav>
             <a href="index.php">Draftsman</a> | 
             <a href="about.html">About</a> | 
@@ -82,17 +162,28 @@ if (isset($_GET['id'])) {
             <button class="login-button" onclick="window.location.href='login.php'">Login</button>
         <?php endif; ?>
 
-    </header>
+</header>
 
-    <main>
-        <?php if ($card): ?>
-            <div class="card-details">
-                <h1><?= htmlspecialchars($card['name']) ?></h1>
-                <img src="<?= htmlspecialchars($card['image_path']) ?>" alt="<?= htmlspecialchars($card['name']) ?>" class="card-image">
-            </div>
-        <?php else: ?>
-            <p>Card not found.</p>
-        <?php endif; ?>
-    </main>
+<main>
+    <?php if ($card): ?>
+        <div class="card-image">
+            <img src="<?= htmlspecialchars($card['image_path']); ?>" alt="<?= htmlspecialchars($card['name']); ?>">
+        </div>
+        <div class="card-info">
+            <h2><?= htmlspecialchars($card['name']); ?></h2>
+            <p class="attribute">Supertype: <span><?= htmlspecialchars($card['supertype']); ?></span></p>
+            <p class="attribute">Type: <span><?= htmlspecialchars($card['type']); ?></span></p>
+            <p class="attribute">Subtype: <span><?= htmlspecialchars($card['subtype']); ?></span></p>
+            <p class="attribute">Mana Cost: <span><?= htmlspecialchars($card['mana']); ?></span></p>
+        </div>
+    <?php else: ?>
+        <p>Card not found.</p>
+    <?php endif; ?>
+</main>
+
+<footer>
+    <p>&copy; <?= date('Y'); ?> Draftsman. <a href="index.php">Home</a></p>
+</footer>
+
 </body>
 </html>

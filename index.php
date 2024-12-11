@@ -39,6 +39,7 @@ try {
             FROM decks d
             JOIN cards c ON d.card1 = c.card_id
             WHERE d.owner_id = :user_id
+            LIMIT 6
         ");
         $stmt->execute(['user_id' => $loggedInUserId]);
         $userDecks = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +56,6 @@ try {
             FROM decks d
             JOIN cards c ON d.card1 = c.card_id
             WHERE d.owner_id != :user_id OR d.owner_id IS NULL
-            LIMIT 6
         ");
         $stmt->execute(['user_id' => $loggedInUserId]);
     } else {
@@ -67,7 +67,6 @@ try {
                 c.image_path AS card1_image
             FROM decks d
             JOIN cards c ON d.card1 = c.card_id
-            LIMIT 6
         ");
         $stmt->execute();
     }
