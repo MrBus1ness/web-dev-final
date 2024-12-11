@@ -117,9 +117,10 @@ try {
         <div class="hero">
             <h1>Welcome to Draftsman</h1>
             <div class="search-bar">
-                <input type="text" placeholder="Search for decks or cards...">
-                <button>Search</button>
+                <input type="text" id="search-input" placeholder="Search for decks or cards...">
+                <button type="button" id="search-button">Search</button>
             </div>
+            <div id="search-results" class="search-results"></div>
             <button class="hero-button" onclick="window.location.href='create_deck.php'">New Deck</button>
         </div>
 
@@ -153,5 +154,85 @@ try {
             <?php } ?>
         </div>
     </main>
+    <!-- search bar script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
+
+        // Function to fetch search results
+        const fetchSearchResults = async (term) => {
+            try {
+                const response = await fetch(`search_cards.php?term=${encodeURIComponent(term)}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                return [];
+            }
+        };
+
+        // Function to display search results
+        const displayResults = (results) => {
+            if (results.length > 0) {
+                const resultsHtml = results.map(card => `<li>${card.name}</li>`).join('');
+                searchResults.innerHTML = `<ul>${resultsHtml}</ul>`;
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = '<p>No results found</p>';
+                searchResults.style.display = 'block';
+            }
+        };
+
+        // Event listener for typing in search input
+        searchInput.addEventListener('input', async () => {
+            const term = searchInput.value.trim();
+            if (term.length > 2) { // Fetch results only if term length > 2
+                const results = await fetchSearchResults(term);
+                displayResults(results);
+            } else {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Optional: Hide results when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!searchResults.contains(event.target) && event.target !== searchInput) {
+                searchResults.style.display = 'none';
+            }
+        });
+    });
+    </script>
+
+    <script>
+        // Handle search suggestion click
+        function handleSearchResultClick(cardId) {
+            window.location.href = `card.php?id=${cardId}`; // Redirect to card details page
+        }
+
+        // Update the displaySearchResults function to include the card ID
+        function displaySearchResults(results) {
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            results.forEach(result => {
+                const listItem = document.createElement('li');
+                listItem.textContent = result.name;
+
+                // Attach the click event to redirect to the card details page
+                listItem.addEventListener('click', () => handleSearchResultClick(result.card_id));
+
+                resultsContainer.appendChild(listItem);
+            });
+
+            // Show the results container
+            resultsContainer.style.display = 'block';
+        }
+    </script>
+
+</body>
+
+
 </body>
 </html>

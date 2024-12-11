@@ -126,6 +126,7 @@ nav a:hover {
     justify-content: center;
     width: 100%;
     max-width: 600px;
+    position: relative; /* Ensures search-results is positioned relative to the search bar */
 }
 
 .search-bar input {
@@ -150,6 +151,42 @@ nav a:hover {
 .search-bar button:hover {
     background-color: #c4411c;
 }
+
+.search-results {
+    position: absolute; /* Positioned relative to .search-bar */
+    color: #000000;
+    top: 53.2%; /* Align directly below the search bar */
+    /* left: 0;
+    right: 0; */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Matches the width of the search bar */
+    max-width: 600px; /* Same as the search bar */
+    margin-top: 5px; /* Space between the search bar and results */
+    display: none; /* Hidden by default */
+    z-index: 1000; /* Ensures it appears above other elements */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    max-height: 300px; /* Limits the height of the dropdown */
+    overflow-y: auto; /* Enables scrolling if results exceed max height */
+}
+
+.search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+}
+
+.search-results li:hover {
+    background-color: #f4f4f4;
+}
+
 
 .hero-button {
     margin-top: 20px;
