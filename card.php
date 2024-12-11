@@ -1,32 +1,57 @@
 <?php
-// Get the card ID from the query parameter
-if (isset($_GET['id'])) {
-    $cardId = $_GET['id'];
+// Database connection settings
+$host = 'localhost'; 
+$dbname = 'card_shop'; 
+$user = 'root'; 
+$pass = 'mysql';
+$charset = 'utf8mb4';
 
-    // Fetch the card details from the database
-    $host = 'localhost'; // Your database connection details
-    $username = 'root';
-    $password = 'mysql';
-    $dbname = 'card_shop';
-    $conn = new mysqli($host, $username, $password, $dbname);
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $stmt = $conn->prepare("SELECT card_id, name, image_path, description FROM cards WHERE card_id = ?");
-    $stmt->bind_param("i", $cardId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $card = $result->fetch_assoc();
-    $stmt->close();
-    $conn->close();
-} else {
-    // If no card ID is provided, redirect back to the homepage or show an error
-    header("Location: index.php");
+try {
+    // Establishing the database connection
+    $conn = new PDO($dsn, $user, $pass, $options);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Handle connection failure
+    echo "Connection failed: " . $e->getMessage();
     exit;
 }
+
+// Fetch card details based on the ID passed in the URL
+if (isset($_GET['id'])) {
+    $card_id = $_GET['id']; // Get the card ID from the URL
+
+    // Prepare the SQL query to fetch the card data
+    $query = "SELECT * FROM cards WHERE card_id = ?";
+    $stmt = $conn->prepare($query);
+
+    // Bind the card_id parameter to the query
+    $stmt->bindParam(1, $card_id, PDO::PARAM_INT);
+
+    // Execute the query
+    $stmt->execute();
+
+    // Fetch the result
+    $card = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Check if the card exists and display it
+    if ($card) {
+        echo "<h1>" . htmlspecialchars($card['name']) . "</h1>";
+        echo "<img src='" . htmlspecialchars($card['image_path']) . "' alt='" . htmlspecialchars($card['name']) . "' />";
+    } else {
+        echo "Card not found.";
+    }
+} else {
+    echo "No card ID specified.";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +75,6 @@ if (isset($_GET['id'])) {
             <div class="card-details">
                 <h1><?= htmlspecialchars($card['name']) ?></h1>
                 <img src="<?= htmlspecialchars($card['image_path']) ?>" alt="<?= htmlspecialchars($card['name']) ?>" class="card-image">
-                <p><?= htmlspecialchars($card['description']) ?></p>
             </div>
         <?php else: ?>
             <p>Card not found.</p>
