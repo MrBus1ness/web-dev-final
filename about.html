@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Draftsman</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        .about-container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 2px solid #ccc;
+            margin: 20px;
+            border-radius: 8px; /* rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+        }
+        .about-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .about-section {
+            margin: 20px 0;
+            max-width: 800px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.php">Draftsman</a> | 
+            <a href="about.html">About</a> | 
+            <a href="decks.php">Decks</a>
+        </nav>
+        
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <div class="user-dropdown">
+                <button class="user-name"><?= htmlspecialchars($_SESSION['username']); ?></button>
+                <div class="dropdown-menu">
+                    <form method="POST" action="logout.php">
+                        <button type="submit" class="logout-button">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        <?php else: ?>
+            <button class="login-button" onclick="window.location.href='login.php'">Login</button>
+        <?php endif; ?>
+        
+    </header>
+
+    <main>
+        <div class="about-container">
+            <h1 class="about-header">About Draftsman</h1>
+            <div class="about-content">
+                <div class="about-section">
+                    <h2>Our Mission</h2>
+                    <p>
+                        At Draftsman, we aim to revolutionize the world of card game enthusiasts by providing a robust and user-friendly deck-building platform. Our mission is to empower players to craft their unique decks with ease and confidence, enhancing their gaming experience through innovative tools and a vibrant community.
+                    </p>
+                </div>
+                <div class="about-section">
+                    <h2>Our Story</h2>
+                    <p>
+                        Draftsman was born out of a passion for card games and a desire to make deck building accessible to everyone. What started as a small project quickly grew into a comprehensive platform, thanks to the support and feedback from our dedicated users. Today, Draftsman is a leading tool for players around the world, offering unmatched features and flexibility.
+                    </p>
+                </div>
+                <div class="about-section">
+                    <h2>Our Team</h2>
+                    <p>
+                        We are a diverse group of developers, designers, and card game enthusiasts committed to delivering the best possible experience for our users. Our team is driven by creativity, innovation, and a shared love for gaming. We work tirelessly to improve Draftsman and introduce new features that cater to the evolving needs of our community.
+                    </p>
+                </div>
+                <div class="about-section">
+                    <h2>Contact Us</h2>
+                    <p>
+                        We love hearing from our users! If you have any questions, feedback, or just want to say hello, feel free to reach out to us at <a href="mailto:support@draftsman.com">support@draftsman.com</a>. Your input helps us grow and improve.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
