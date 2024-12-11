@@ -64,10 +64,24 @@ if (isset($_GET['id'])) {
 <body>
     <header>
         <nav>
-            <a href="index.php">Home</a> | 
+            <a href="index.php">Draftsman</a> | 
             <a href="about.html">About</a> | 
             <a href="decks.php">Decks</a>
         </nav>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <div class="user-dropdown">
+                <button class="user-name"><?= htmlspecialchars($_SESSION['username']); ?></button>
+                <div class="dropdown-menu">
+                    <form method="POST" action="logout.php">
+                        <button type="submit" class="logout-button">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        <?php else: ?>
+            <button class="login-button" onclick="window.location.href='login.php'">Login</button>
+        <?php endif; ?>
+
     </header>
 
     <main>

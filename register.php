@@ -43,8 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="decks.php">Decks</a>
         </nav>
 
-        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
-            <!-- User is logged in -->
+        <?php if (isset($_SESSION['user_id'])): ?>
             <div class="user-dropdown">
                 <button class="user-name"><?= htmlspecialchars($_SESSION['username']); ?></button>
                 <div class="dropdown-menu">
@@ -54,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         <?php else: ?>
-            <!-- User is not logged in -->
             <button class="login-button" onclick="window.location.href='login.php'">Login</button>
         <?php endif; ?>
+
     </header>
 
     <main>
