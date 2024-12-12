@@ -128,7 +128,7 @@ try {
 
         <!-- User Decks -->
         <?php if (!empty($userDecks)) { ?>
-            <h1 style="text-align: center; margin-top: 20px;">Your Decks</h1>
+            <h1 style="text-align: center; background-color: #17829d; padding: 20px;">Your Decks</h1>
             <div class="deck-preview-container">
                 <?php foreach ($userDecks as $deck) { ?>
                     <div class="deck-preview" onclick="window.location.href='deck.php?id=<?= htmlspecialchars($deck['deck_id']) ?>'">
@@ -141,7 +141,7 @@ try {
         <?php } ?>
 
         <!-- Other Decks -->
-        <h1 style="text-align: center; margin-top: 20px;">Other Decks</h1>
+        <h1 style="text-align: center; margin-top: 20px; background-color: #17829d; padding: 20px;">Other Decks</h1>
         <div class="deck-preview-container">
             <?php if (!empty($otherDecks)) { ?>
                 <?php foreach ($otherDecks as $deck) { ?>
