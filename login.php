@@ -52,13 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Login - Draftsman</title>
     <link rel="stylesheet" href="loginstyles.css">
+    <link rel="icon" href="draftsman_favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.php">Draftsman</a> | 
-            <a href="about.html">About</a> | 
-            <a href="decks.php">Decks</a>
+            <a href="about.php">About</a> | 
+            <a href="user_decks.php">Decks</a>
         </nav>
 
         <?php if (isset($_SESSION['user_id'])): ?>
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="login-container">
         <!-- Logo Section -->
             <div class="logo">
-                <img src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+                <img src="draftsman_logo.png" alt="Logo"> <!-- Replace with your logo URL -->
                 <h1>Login</h1>
                 <?php if ($error): ?>
                     <div class="error"><?php echo htmlspecialchars($error); ?></div>

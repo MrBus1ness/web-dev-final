@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Draftsman</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="draftsman_favicon.ico" type="image/x-icon">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -77,7 +77,7 @@
     <header>
         <nav>
             <a href="index.php">Draftsman</a> | 
-            <a href="about.html">About</a> | 
+            <a href="about.php">About</a> | 
             <a href="user_decks.php">Decks</a>
         </nav>
         

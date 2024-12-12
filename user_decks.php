@@ -52,14 +52,14 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Decks</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="draftsman_favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.php">Draftsman</a> | 
-            <a href="about.html">About</a> | 
-            <a href="decks.php">Decks</a>
+            <a href="about.php">About</a> | 
+            <a href="user_decks.php">Decks</a>
         </nav>
 
         <?php if (isset($_SESSION['user_id'])): ?>
