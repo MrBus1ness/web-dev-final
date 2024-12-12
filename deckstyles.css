@@ -31,6 +31,18 @@ nav a:hover {
     text-decoration: underline;
 }
 
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
 /* Login Button */
 .login-button {
     background-color: #17829d; /* Button background color */
@@ -167,14 +179,16 @@ nav a:hover {
     margin: 10px 0;
 }
 
-/* add cards */
+/* Add Cards */
 .add-card-container {
     margin-top: 20px;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4; /* Updated to match main stylesheet */
     max-width: 300px;
+    width: 100%; /* Ensure it takes full width up to max-width */
+    position: relative;
 }
 
 .add-card-container h2 {
@@ -213,12 +227,12 @@ nav a:hover {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     background: #fff;
     max-height: 150px;
     overflow-y: auto;
     position: absolute;
-    width: 100%;
+    width: 300px;
     z-index: 1000;
 }
 
