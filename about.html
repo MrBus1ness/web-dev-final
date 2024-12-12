@@ -29,6 +29,36 @@
             max-width: 800px;
             text-align: justify;
         }
+        .forum-section {
+            margin: 40px 0;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .forum-section h2 {
+            text-align: center;
+        }
+        .forum-section form {
+            display: flex;
+            flex-direction: column;
+        }
+        .forum-section label, .forum-section input, .forum-section textarea {
+            margin: 10px 0;
+            width: 100%;
+        }
+        .forum-section button {
+            padding: 10px;
+            background-color: #17829d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            align-self: center;
+        }
+        .forum-section button:hover {
+            background-color: #036982;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +111,18 @@
                     <p>
                         We love hearing from our users! If you have any questions, feedback, or just want to say hello, feel free to reach out to us at <a href="mailto:support@draftsman.com">support@draftsman.com</a>. Your input helps us grow and improve.
                     </p>
+                </div>
+                <div class="forum-section">
+                    <h2>Create a Forum Thread</h2>
+                    <form action="create_thread.php" method="POST">
+                        <label for="title">Thread Title</label>
+                        <input type="text" id="title" name="title" required>
+                        <label for="content">Thread Content</label>
+                        <textarea id="content" name="content" rows="5" required></textarea>
+                        <label for="email">Your Email (Optional)</label>
+                        <input type="email" id="email" name="email">
+                        <button type="submit">Create Thread</button>
+                    </form>
                 </div>
             </div>
         </div>
