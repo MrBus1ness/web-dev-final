@@ -144,7 +144,10 @@ if (isset($_GET['id'])) {
 
 <header>
         <nav>
-            <a href="index.php">Draftsman</a> | 
+            <a href="index.php">
+                <img src="draftsman_logo.png" alt="Draftsman Logo" style="height: 48px; vertical-align: middle;">
+                Draftsman
+            </a> | 
             <a href="about.php">About</a> | 
             <a href="user_decks.php">Decks</a>
         </nav>
