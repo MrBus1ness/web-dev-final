@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2024 at 04:38 AM
+-- Generation Time: Dec 12, 2024 at 04:41 AM
 -- Server version: 8.0.39
 -- PHP Version: 8.2.22
 
@@ -151,7 +151,7 @@ INSERT INTO `decks` (`deck_id`, `deck_name`, `owner_id`, `card1`, `card2`, `card
 (1, 'Test One', 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
 (2, 'Test Two', 3, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
 (3, 'Test Three', 1, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30),
-(4, 'New Deck', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(4, 'New Deck', 1, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40);
 
 -- --------------------------------------------------------
 
