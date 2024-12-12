@@ -91,7 +91,7 @@ try {
     <header>
         <nav>
             <a href="index.php">Draftsman</a> | 
-            <a href="about.html">About</a> | 
+            <a href="about.php">About</a> | 
             <a href="user_decks.php">Decks</a>
         </nav>
 

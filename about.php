@@ -7,37 +7,40 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
         .about-container {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border: 2px solid #ccc;
             margin: 20px;
-            border-radius: 8px; /* rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
         }
         .about-header {
             text-align: center;
             margin-bottom: 20px;
+            padding: 20px;
+            background-color: #17829d;
+            color: white;
+            border-radius: 8px;
         }
         .about-content {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .about-section {
+        .about-section, .forum-section, .threads-container {
             margin: 20px 0;
             max-width: 800px;
-            text-align: justify;
-        }
-        .forum-section {
-            margin: 40px 0;
-            max-width: 800px;
-            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
         }
-        .forum-section h2 {
+        .about-section:nth-child(odd), .forum-section, .threads-container {
+            background-color: #f4f4f4;
+        }
+        .about-section:nth-child(even) {
+            background-color: #e1ecf4;
+        }
+        .about-section h2, .forum-section h2, .threads-container h2 {
             text-align: center;
         }
         .forum-section form {
@@ -55,9 +58,18 @@
             border: none;
             cursor: pointer;
             align-self: center;
+            border-radius: 4px;
         }
         .forum-section button:hover {
             background-color: #036982;
+        }
+        .thread-item {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -123,6 +135,51 @@
                         <input type="email" id="email" name="email">
                         <button type="submit">Create Thread</button>
                     </form>
+                </div>
+                <div class="threads-container">
+                    <h2>Forum Threads</h2>
+                    <?php
+                    // Database connection
+                    $host = 'localhost'; 
+                    $dbname = 'card_shop'; 
+                    $user = 'root'; 
+                    $pass = 'mysql';
+                    $charset = 'utf8mb4';
+
+                    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+                    $options = [
+                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES   => false,
+                    ];
+
+                    try {
+                        $conn = new PDO($dsn, $user, $pass, $options);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        // Fetch threads from the database
+                        $stmt = $conn->prepare("SELECT * FROM forum_threads ORDER BY created_at DESC");
+                        $stmt->execute();
+                        $threads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        if (!empty($threads)) {
+                            foreach ($threads as $thread) {
+                                echo "<div class='thread-item'>";
+                                echo "<h3>" . htmlspecialchars($thread['title']) . "</h3>";
+                                echo "<p>" . nl2br(htmlspecialchars($thread['content'])) . "</p>";
+                                if ($thread['email']) {
+                                    echo "<p>Contact: <a href='mailto:" . htmlspecialchars($thread['email']) . "'>" . htmlspecialchars($thread['email']) . "</a></p>";
+                                }
+                                echo "<p><small>Posted on: " . htmlspecialchars($thread['created_at']) . "</small></p>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "<p>No forum threads found.</p>";
+                        }
+                    } catch (PDOException $e) {
+                        echo "Connection failed: " . $e->getMessage();
+                    }
+                    ?>
                 </div>
             </div>
         </div>

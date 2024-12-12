@@ -35,7 +35,7 @@ try {
     ]);
 
     // Redirect back to the about page or a confirmation page
-    header('Location: about.html');
+    header('Location: about.php');
     exit;
 
 } catch (PDOException $e) {
