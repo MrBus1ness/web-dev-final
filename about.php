@@ -78,7 +78,7 @@
         <nav>
             <a href="index.php">Draftsman</a> | 
             <a href="about.html">About</a> | 
-            <a href="decks.php">Decks</a>
+            <a href="user_decks.php">Decks</a>
         </nav>
         
         <?php if (isset($_SESSION['user_id'])): ?>

@@ -1,4 +1,3 @@
-/* General body and page styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -34,7 +33,7 @@ nav a:hover {
 
 /* Login Button */
 .login-button {
-    background-color: #007BFF; /* Button background color */
+    background-color: #17829d; /* Button background color */
     color: white;
     padding: 8px 15px;
     border: none;
@@ -44,7 +43,7 @@ nav a:hover {
 }
 
 .login-button:hover {
-    background-color: #0056b3; /* Hover effect */
+    background-color: #036982; /* Hover effect */
 }
 
 /* User Dropdown */
@@ -54,7 +53,7 @@ nav a:hover {
 }
 
 .user-name {
-    background-color: #4CAF50; /* Green */
+    background-color: #17829d; /* Green */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -66,7 +65,7 @@ nav a:hover {
 }
 
 .user-name:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
+    background-color: #036982; /* Slightly darker green on hover */
 }
 
 .user-dropdown .dropdown-menu {
@@ -103,7 +102,6 @@ nav a:hover {
     background-color: #d32f2f; /* Darker red on hover */
 }
 
-
 /* Hero Section */
 .hero {
     display: flex;
@@ -111,7 +109,7 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     height: 80vh;
-    background: linear-gradient(to bottom, #007BFF, #0056b3);
+    background: linear-gradient(to bottom, #17829d, #036982);
     color: white;
     text-align: center;
 }
@@ -186,7 +184,6 @@ nav a:hover {
 .search-results li:hover {
     background-color: #f4f4f4;
 }
-
 
 .hero-button {
     margin-top: 20px;
